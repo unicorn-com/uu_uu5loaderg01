@@ -1,0 +1,42 @@
+{
+  "name": "uu5loaderg01~root",
+  "version": "1.8.1",
+  "private": true,
+  "workspaces": [
+    "uu5loaderg01"
+  ],
+  "description": "Library contains loader for loading other libraries in uu5 applications and in component demo pages.",
+  "license": "License Commercial",
+  "spec": "nodejs-multi; uu_appg01_devkit@6.5.0; uu5devkitg01-plugin@1.4.0",
+  "uuBuildSettings": {},
+  "devDependencies": {
+    "uu_appg01_devkit": "^6.5.0",
+    "uu5devkitg01-plugin": "^1.4.0",
+    "uu_cloudg02-devkit": "^0.15.1"
+  },
+  "scripts": {
+    "clean": "uu_appg01_devkit clean",
+    "test": "uu_appg01_devkit test",
+    "testBrowser": "uu_appg01_devkit testBrowser",
+    "build": "uu_appg01_devkit build",
+    "package": "uu_appg01_devkit package",
+    "start": "uu_appg01_devkit start",
+    "prettify": "uu_appg01_devkit prettify",
+    "vulnerabilityScan": "uu_appg01_devkit vulnerabilityScan",
+    "deploy": "uu_appg01_devkit deploy",
+    "uuAppBox": "uu_appg01_devkit uuAppBox",
+    "uuCloudDeploy": "uu_appg01_devkit uuCloudDeploy",
+    "uuCloudUndeploy": "uu_appg01_devkit uuCloudUndeploy",
+    "uuCloudDeployList": "uu_appg01_devkit uuCloudDeployList",
+    "uuAppDevKitUpgrade": "uu_appg01_devkit uuAppDevKitUpgrade",
+    "uuCloudg02AppBox": "uu_cloudg02-devkit appBox",
+    "uuCloudg02Deploy": "uu_cloudg02-devkit deploy",
+    "uu5Deploy": "uu5devkitg01-plugin deploy",
+    "uu5UuAppLibraryRegistryDeploy": "uu5devkitg01-plugin uuAppLibraryRegistryDeploy",
+    "uu5LsiExport": "uu5devkitg01-plugin lsiExport",
+    "uu5LsiImport": "uu5devkitg01-plugin lsiImport",
+    "uuCloudg02AppBoxCopy": "uu_cloudg02-devkit appBoxCopy",
+    "uuCloudg02AppBoxExport": "uu_cloudg02-devkit appBoxExport",
+    "uuCloudg02AppBoxImport": "uu_cloudg02-devkit appBoxImport"
+  }
+}

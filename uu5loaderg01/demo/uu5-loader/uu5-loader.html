@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Uu5Loader Demo</title>
+
+    <script>
+      // prettier-ignore
+      if (!location.href.match(/^(about:|file:)/)) {
+        var bplCookie = document.cookie.match(/(^|;\s*)uu\.app\.bpl=([^;]+)/);
+        var bplSegmentCount = (bplCookie ? Number(bplCookie[2]) : null);
+        if (typeof bplSegmentCount !== "number" || isNaN(bplSegmentCount) || bplSegmentCount < 0) bplSegmentCount = 2;
+        var appBaseUrlPath = (location.pathname.split(/\//).slice(0,1+bplSegmentCount).join("/")+"/").replace(/\/+/g,"/").replace(/"/g,"");
+        var appAssetsRelativeUrlPath = "public/1.0.0/";
+        document.write('<base href="' + appBaseUrlPath + appAssetsRelativeUrlPath + '" data-uu-app-base="' + appBaseUrlPath + '" data-uu-app-assets-base="' + appAssetsRelativeUrlPath + '">');
+      }
+    </script>
+
+    <script src="/uu5loaderg01.js" crossorigin="anonymous"></script>
+    <script src="/demo/uu5-loader/example-config.js"></script>
+    <script>
+      Uu5Loader.config({
+        imports: {
+          libTestRelativePath1: "./relative/lib.js",
+          libTestRelativePath2: "relative/lib.js",
+          libTestRelativePath3: "../relative/lib.js",
+          libTestAbsolutePath1: "/absolute/lib.js",
+        },
+      });
+    </script>
+  </head>
+  <body>
+    <div id="uu5">
+      This text should be replaced by transpiled content containing fragment, dynamically loaded component, etc.
+    </div>
+
+    <script type="text/babel">
+      import { Utils, createComponent, DynamicLibraryComponent, useState, useEffect } from "uu5g05";
+      import Uu5Elements from "uu5g05-elements";
+      import UU5 from "uu5g04";
+
+      const UrlCheck = createComponent({
+        render(props) {
+          const { importKey, expectedUrl } = props;
+          const resolvedUrl = Uu5Loader.resolve(importKey);
+          const isOk = resolvedUrl === expectedUrl;
+          const configEntryUrl = Uu5Loader.config().imports[importKey];
+          return (
+            <div>
+              <Uu5Elements.Icon
+                icon={isOk ? "mdi-check" : "mdi-exclamation"}
+                colorScheme={isOk ? "positive" : "negative"}
+              />
+              <Uu5Elements.Text colorScheme={isOk ? "positive" : "negative"}>
+                {configEntryUrl} -&gt; {resolvedUrl + ""}
+                {!isOk ? ` ! should be: ${expectedUrl}` : null}
+              </Uu5Elements.Text>
+            </div>
+          );
+        },
+      });
+
+      const RefreshCacheCheck = createComponent({
+        render(props) {
+          const [isOk, setIsOk] = useState();
+          const [reloadedUrls, setReloadedUrls] = useState();
+          useEffect(() => {
+            let ricId = requestIdleCallback(() => {
+              let presentJsEntries = performance.getEntriesByType("resource").filter((it) => it.name.endsWith(".js"));
+              Uu5Loader.refreshCache().finally(() => {
+                let newJsEntries = performance
+                  .getEntriesByType("resource")
+                  .filter((it) => it.name.endsWith(".js"))
+                  .slice(presentJsEntries.length);
+                setReloadedUrls(newJsEntries.map((it) => it.name));
+                setIsOk(newJsEntries.length > 0);
+              });
+            });
+            return () => cancelIdleCallback(ricId);
+          }, []);
+
+          return (
+            <div>
+              {isOk == null ? (
+                <Uu5Elements.Pending />
+              ) : (
+                <>
+                  <Uu5Elements.Icon
+                    icon={isOk ? "mdi-check" : "mdi-exclamation"}
+                    colorScheme={isOk ? "positive" : "negative"}
+                  />
+
+                  <Uu5Elements.Text colorScheme={isOk ? "positive" : "negative"}>
+                    refreshCache() performed refresh of {reloadedUrls.length} URLs:{" "}
+                    <pre>{"  " + reloadedUrls.join("\n  ")}</pre>
+                  </Uu5Elements.Text>
+                </>
+              )}
+            </div>
+          );
+        },
+      });
+
+      const Page = createComponent({
+        render() {
+          const [refreshCacheCheckKey, setRefreshCacheCheckKey] = useState(0);
+
+          return (
+            <div>
+              <h4>Basic import - Uu5Elements</h4>
+              <Uu5Elements.Block header="" card="content" colorScheme="primary" significance="highlighted">
+                Uu5Elements with GDS works.
+              </Uu5Elements.Block>
+              <h4>Fragments, advanced syntax</h4>
+              <p>
+                <>Fragment works.</>
+              </p>
+              <p>{null ?? 1 ? `Advanced syntax (null ?? 1) works.` : null}</p>
+              <h4>Dynamically loaded UU5.Forms.Controls (DynamicLibraryComponent):</h4>
+              <DynamicLibraryComponent uu5Tag="UU5.Forms.Controls" />
+              <h4>Globals</h4>
+              global Uu5Loader is defined: <b>{!!window.Uu5Loader + ""}</b>
+              <br />
+              uu5g05 Utils.Uu5Loader === Uu5Loader: <b>{(Utils.Uu5Loader === window.Uu5Loader) + ""}</b>
+              <br />
+              uu5g04 UU5.Utils.Uu5Loader === Uu5Loader: <b>{(UU5.Utils.Uu5Loader === window.Uu5Loader) + ""}</b>
+              <br />
+              <h4>Relative/absolute path resolving</h4>
+              <UrlCheck importKey="libTestRelativePath1" expectedUrl={document.baseURI + "relative/lib.js"} />
+              <UrlCheck importKey="libTestRelativePath2" expectedUrl={document.baseURI + "relative/lib.js"} />
+              <UrlCheck
+                importKey="libTestRelativePath3"
+                expectedUrl={document.baseURI.replace(/[^/]*\/$/, "") + "relative/lib.js"}
+              />
+              <UrlCheck
+                importKey="libTestAbsolutePath1"
+                expectedUrl={location.protocol + "//" + location.host + "/absolute/lib.js"}
+              />
+              <h4>Uu5Loader.refreshCache()</h4>
+              <Uu5Elements.Button onClick={() => setRefreshCacheCheckKey((v) => v + 1)}>
+                refreshCache()
+              </Uu5Elements.Button>
+              {refreshCacheCheckKey ? <RefreshCacheCheck key={refreshCacheCheckKey} /> : null}
+            </div>
+          );
+        },
+      });
+
+      Utils.Dom.render(<Page />, document.getElementById("uu5"));
+    </script>
+  </body>
+</html>

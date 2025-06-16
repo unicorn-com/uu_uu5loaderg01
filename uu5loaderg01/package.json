@@ -1,0 +1,62 @@
+{
+  "name": "uu5loaderg01",
+  "version": "1.8.1",
+  "description": "Library contains loader for loading other libraries in uu5 applications and in component demo pages.",
+  "license": "License Commercial",
+  "namespace": "Uu5Loader",
+  "spec": "uu5-lib; uu_appg01_devkit@6.5.0; uu5devkitg01-plugin@1.4.0",
+  "uuBuildSettings": {
+    "packs": [
+      {
+        "entryPoints": [
+          "index.js"
+        ],
+        "libraryGlobalVariable": "Uu5Loader",
+        "outputFile": "uu5loaderg01.js"
+      },
+      {
+        "entryPoints": [
+          "polyfills-build.js"
+        ],
+        "libraryGlobalVariable": "Uu5LoaderPolyfills",
+        "outputFile": "uu5loaderg01-polyfills.js"
+      }
+    ],
+    "externals": {}
+  },
+  "devDependencies": {
+    "promise-polyfill": "8.2.0",
+    "systemjs": "6.11.0",
+    "systemjs-babel": "0.3.1",
+    "url-polyfill": "1.1.12",
+    "uu_appg01_devkit": "^6.5.0",
+    "uu_appg01_oidc": "^4.0.0",
+    "uu5devkitg01-plugin": "^1.4.0"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "scripts": {
+    "clean": "uu_appg01_devkit clean",
+    "test": "uu_appg01_devkit test",
+    "build": "node tools/prebuild.js && uu_appg01_devkit build",
+    "package": "uu_appg01_devkit package",
+    "start": "uu_appg01_devkit start",
+    "prettify": "uu_appg01_devkit prettify",
+    "vulnerabilityScan": "uu_appg01_devkit vulnerabilityScan",
+    "uuAppDevKitUpgrade": "uu_appg01_devkit uuAppDevKitUpgrade",
+    "uu5Generate": "uu5devkitg01-plugin generate",
+    "uu5LsiExport": "uu5devkitg01-plugin lsiExport",
+    "uu5LsiImport": "uu5devkitg01-plugin lsiImport",
+    "uu5DocUpdateExamples": "uu5devkitg01-plugin docUpdateExamples"
+  },
+  "main": "src/index.js",
+  "files": [
+    "dist",
+    "dist-node"
+  ],
+  "prettier": {
+    "printWidth": 120
+  },
+  "browserslist": "> 0.2%, not ie > 0, not op_mini all, not dead, not android < 5"
+}

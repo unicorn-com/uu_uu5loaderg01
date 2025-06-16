@@ -1,0 +1,28 @@
+{
+  "product": "uu_uu5loaderg01",
+  "version": "1.8.1",
+  "license": "License Commercial",
+  "description": {
+    "en": "Library contains loader for loading other libraries in uu5 applications and in component demo pages.",
+    "cs": "Knihovna obsahuje loader pro načítání ostatních knihoven v uu5 aplikacích a ve stránkách s ukázkami komponent."
+  },
+  "docUri": "https://uuapp.plus4u.net/uu-bookkit-maing01/2fe1d9bf27eb4db9a4b328f2fc807368/book",
+  "flsUri": "https://uuapp.plus4u.net/uu-flsg01-main/06ea1e6d022244a7a16ab9de54249e9c",
+  "imageUri": "https://uuapp.plus4u.net/uu-bookkit-maing01/2fe1d9bf27eb4db9a4b328f2fc807368/getProductLogo",
+  "devkit": {
+    "development": {
+      "appBoxLocationUri": "ues:UU-BT:PRD.UU-UU5/APPBOX",
+      "appDeploymentUri": "ues:UUHUMANINTERFACEFAMILY-BT[76034904533459425]:FAMILY_UUHUMANINTERFACE_FAT_RESOURCEPOOL_AWE[6202518f1c544d65b64a96c3]:UU.UU5LOADERG01[622a07768ca53b894e1f2c35]",
+      "resourcePoolUri": "ues:UUHUMANINTERFACEFAMILY-BT:FAMILY_UUHUMANINTERFACE_FAT_RESOURCEPOOL_AWE",
+      "uuCloudUniverseBaseUri": "----- VALUE REQUIRED -----",
+      "uu5LibraryRepositoryWorkloadOid": "----- VALUE REQUIRED -----",
+      "uuAppBoxRegistryBaseUri": "https://uuapp.plus4u.net/uu-cloud-appboxregistryg01/eae0ba1ec4f1428aaa8d9c090e8762db",
+      "uuAppLibraryRegistryBaseUri": "----- VALUE REQUIRED -----",
+      "uuAppBoxUri": "https://uuapp.plus4u.net/uu-cloud-appboxregistryg01/eae0ba1ec4f1428aaa8d9c090e8762db/uuAppBox/get?id=67c7070173998183f1d29834&extended=true"
+    }
+  },
+  "uu5loaderg01": {
+    "namespace": "Uu5Loader",
+    "sourceUri": "https://cdn.plus4u.net/uu-uu5loaderg01/%s/uu5loaderg01.min.js"
+  }
+}

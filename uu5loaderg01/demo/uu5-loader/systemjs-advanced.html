@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Uu5Loader Demo</title>
+
+    <script>
+      // prettier-ignore
+      if (!location.href.match(/^(about:|file:)/)) {
+        var bplCookie = document.cookie.match(/(^|;\s*)uu\.app\.bpl=([^;]+)/);
+        var bplSegmentCount = (bplCookie ? Number(bplCookie[2]) : null);
+        if (typeof bplSegmentCount !== "number" || isNaN(bplSegmentCount) || bplSegmentCount < 0) bplSegmentCount = 2;
+        var appBaseUrlPath = (location.pathname.split(/\//).slice(0,1+bplSegmentCount).join("/")+"/").replace(/\/+/g,"/").replace(/"/g,"");
+        var appAssetsRelativeUrlPath = "public/1.0.0/";
+        document.write('<base href="' + appBaseUrlPath + appAssetsRelativeUrlPath + '" data-uu-app-base="' + appBaseUrlPath + '" data-uu-app-assets-base="' + appAssetsRelativeUrlPath + '">');
+      }
+    </script>
+
+    <script src="https://cdn.plus4u.net/libs/systemjs/0.19.47/system.src.js" crossorigin="anonymous"></script>
+    <script src="/demo/uu5-loader/example-config.js"></script>
+  </head>
+  <body>
+    <div id="renderHere">uu5loaderg01 is not used, but uu5g05 API Utils.Uu5Loader should be still functioning because old SystemJS is present.</div>
+
+    <script
+      src="https://cdn.plus4u.net/uu-app-templateg01/1.0.0/in-browser-transpilation.js"
+      crossorigin="anonymous"
+    ></script>
+    <script type="text/babel">
+      import { Utils } from "uu5g05";
+      import UU5 from "uu5g04";
+      import { createComponent } from "uu5g04-hooks";
+
+      Utils.Uu5Loader.config({
+        imports: {
+          uu_appg01_core: "https://cdn.plus4u.net/uu-appg01-core/5.0.0/uu_appg01_core.js",
+          uu_appg01: "https://cdn.plus4u.net/uu-appg01/5.0.0/uu_appg01.js",
+          uu_appg01_oidc: "https://cdn.plus4u.net/uu-appg01-oidc/3.0.0/uu_appg01_oidc.js",
+        },
+      });
+      Utils.Uu5Loader.import("uu_appg01_oidc").then(function (UuAppOidc) {
+        function Page(props) {
+          return (
+            <UU5.Common.Session session={UuAppOidc.Session.currentSession}>
+              uu5g05's Utils.Uu5Loader works.
+              {UU5.Common.Tools.findComponent("Plus4U5.Bricks.BusinessCard")}
+            </UU5.Common.Session>
+          );
+        }
+  
+        UU5.Common.DOM.render(<Page />, document.getElementById("renderHere"));
+      });
+    </script>
+  </body>
+</html>
