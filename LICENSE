@@ -1,4 +1,4 @@
-uu5Loader g01 library with configuring environment about dependencies
+uu5Loader g01 library contains loader for loading other libraries in uu5 applications and in component demo pages
 Copyright (C) 2025 Unicorn a.s.
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

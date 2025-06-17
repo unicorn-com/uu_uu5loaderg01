@@ -1,7 +1,7 @@
 {
   "product": "uu_uu5loaderg01",
   "version": "1.8.1",
-  "license": "License Commercial",
+  "license": "GPL-3.0",
   "description": {
     "en": "Library contains loader for loading other libraries in uu5 applications and in component demo pages.",
     "cs": "Knihovna obsahuje loader pro načítání ostatních knihoven v uu5 aplikacích a ve stránkách s ukázkami komponent."

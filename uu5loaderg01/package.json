@@ -2,7 +2,7 @@
   "name": "uu5loaderg01",
   "version": "1.8.1",
   "description": "Library contains loader for loading other libraries in uu5 applications and in component demo pages.",
-  "license": "License Commercial",
+  "license": "GPL-3.0",
   "namespace": "Uu5Loader",
   "spec": "uu5-lib; uu_appg01_devkit@6.5.0; uu5devkitg01-plugin@1.4.0",
   "uuBuildSettings": {
