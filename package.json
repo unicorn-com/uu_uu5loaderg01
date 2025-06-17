@@ -6,7 +6,7 @@
     "uu5loaderg01"
   ],
   "description": "Library contains loader for loading other libraries in uu5 applications and in component demo pages.",
-  "license": "License Commercial",
+  "license": "GPL-3.0",
   "spec": "nodejs-multi; uu_appg01_devkit@6.5.0; uu5devkitg01-plugin@1.4.0",
   "uuBuildSettings": {},
   "devDependencies": {
